@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>My page title</title>
+    <style>
+        :root {
+            --primary-color: rgb(255, 255, 255);
+            --secondary-color: rgb(0, 0, 0);
+            --bg-color: rgb(255, 255, 255);
+            --font-color: rgb(0, 0, 0);
+            --heading-color: rgb(0, 0, 0);
+        }
+
+        [data-theme="dark"] {
+            --primary-color: rgba(0, 0, 0, 0.815);
+            --secondary-color: rgb(255, 255, 255);
+            --bg-color: rgba(0, 0, 0, 0.815);
+            --font-color: rgb(255, 255, 255);
+            --heading-color: rgb(255, 255, 255);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--font-color);
+        }
+
+        h1, h2, h3 {
+            color: var(--heading-color);
+        }
+    </style>
+    <script>
+        function updateHeading() {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const userName = urlParams.get('user_name');
+            const heading = document.getElementById('heading');
+            heading.textContent = userName ? `Hello, ${userName}` : 'Hello!';
+        }
+
+        function updateTime() {
+            const now = new Date();
+            const formattedTime = now.toLocaleString();
+            const timeDisplay = document.getElementById('time');
+            timeDisplay.textContent = formattedTime;
+        }
+
+        function changeImage(imageURL, caption) {
+            const image = document.getElementById('image');
+            const imageCaption = document.getElementById('caption');
+
+            image.src = imageURL;
+            imageCaption.textContent = caption;
+        }
+    </script>
+</head>
+<body onload="updateHeading(); updateTime();">
+    <header>
+        <h1 id="heading">Header</h1>
+        <button id="theme-toggle">Toggle Theme</button>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Our team</a></li>
+            <li><a href="#">Projects</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <form>
+            <input type="text" name="user_name" placeholder="Enter your name!">
+            <button type="submit">Apply!</button>
+        </form>
+    </nav>
+    <main>
+        <article>
+            <h2>Article heading</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Donec a diam lectus. Set sit amet ipsum mauris. Maecenas congue ligula as quam viverra nec consectetur ant hendrerit. Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue. Nam tincidunt congue enim, ut porta lorem lacinia consectetur.</p>
+            <h3>Subsection</h3>
+            <p>Donec ut librero sed accu vehicula ultricies a non tortor. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aenean ut gravida lorem. Ut turpis felis, pulvinar a semper sed, adipiscing id dolor.</p>
+            <p>Pelientesque auctor nisi id magna consequat sagittis. Curabitur dapibus, enim sit amet elit pharetra tincidunt feugiat nist imperdiet. Ut convallis libero in urna ultrices accumsan. Donec sed odio eros.</p>
+            <h3>Another subsection</h3>
+            <p>Donec viverra mi quis quam pulvinar at malesuada arcu rhoncus. Cum soclis natoque penatibus et manis dis parturient montes, nascetur ridiculus mus. In rutrum accumsan ultricies. Mauris vitae nisi at sem facilisis semper ac in est.</p>
+            <p>Vivamus fermentum semper porta. Nunc diam velit, adipscing ut tristique vitae sagittis vel odio. Maecenas convallis ullamcorper ultricied. Curabitur ornare, ligula semper consectetur sagittis, nisi diam iaculis velit, is fringille sem nunc vet mi.</p>
+        </article>
+        <aside>
+            <h2>Related</h2>
+            <ul>
+                <li><a href="#">Oh I do like to be beside the seaside</a></li>
+                <li><a href="#">Oh I do like to be beside the sea</a></li>
+                <li><a href="#">Although in the North of England</a></li>
+                <li><a href="#">It never stops raining</a></li>
+                <li><a href="#">Oh well...</a></li>
+            </ul>
+            <ul>
+                <li><button onclick="changeImage('https://live.staticflickr.com/5505/10517564194_c98c355387_b.jpg', 'Famous Japanese Garden Tree in Portland by Michael Matti')">Japanese Garden Tree</button></li>
+                <li><button onclick="changeImage('https://live.staticflickr.com/1227/1155226271_39aa31cf4d_b.jpg', 'Ceiba Tree by LollyKnit')">Ceiba Tree</button></li>
+                <li><button onclick="changeImage('https://live.staticflickr.com/2426/3795866926_834c167b24_b.jpg', 'Ancient Olive Trees by Gareth1953 All Right Now')">Ancient Olive Trees</button></li>
+                <li><button onclick="changeImage('https://live.staticflickr.com/3118/2431912955_f1efb765aa_b.jpg', 'Palm tree by F H Mira')">Palm tree</button></li>
+                <li><button onclick="changeImage('https://live.staticflickr.com/7099/6968551938_8960080fd9_b.jpg', 'Mangrove by Brisbane City Council')">Mangroves</button></li>
+            </ul>
+        </aside>
+    </main>
+    <footer>
+        <p>&copy; 2023 by anonymous being. All rights reserved.</p>
+    </footer>
+    <div id="time"></div>
+    <img id="image" src="" alt="Image">
+    <p id="caption"></p>
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+        });
+
+        setInterval(updateTime, 1000); // Update time every second
+    </script>
+</body>
+</html>
